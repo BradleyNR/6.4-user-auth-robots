@@ -1,0 +1,15 @@
+<section class="header">
+<h1 class="main-header">These fine robots are looking for work!</h1>
+</section>
+
+<div class="robot-all">
+  {{#each robots}}
+  {{#unless job}}
+      <div class="robot-profile">
+        <img class="main-image" src="{{avatar}}" alt="">
+        <a class="name-link" href="/profile/{{name}}">{{name}}</a>
+        <p class="robot-text">Skills:<br>{{skills}}</p>
+      </div>
+  {{/unless}}
+  {{/each}}
+</div>

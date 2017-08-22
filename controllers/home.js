@@ -5,7 +5,20 @@ let HomeController = {
     res.render('index', {robots: Data.users})
   },
   profile: function(req, res){
-    res.send('Hello Profile!');
+    let robotName = req.params.name;
+    let targetItem;
+    Data.users.forEach((item) => {
+    if (item.name == robotName) {
+      targetItem = item;
+    }
+    });
+    res.render('profile', {robot: targetItem});
+  },
+  jobseekers: function(req, res){
+    res.render('jobseekers', {robots: Data.users})
+  },
+  employed: function(req, res){
+    res.render('employed', {robots: Data.users})
   }
 };
 

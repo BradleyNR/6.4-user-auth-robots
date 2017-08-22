@@ -5,9 +5,10 @@ const routes = require('./router');
 const path = require('path');
 
 const app = express();
+//absolute path
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //passing app into routes

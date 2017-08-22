@@ -2,7 +2,6 @@ let express = require('express');
 
 //requiring our controller files
 let HomeController = require('./controllers/home');
-let ProfileController = require('./controllers/profile');
 
 
 module.exports = function(app){
@@ -11,8 +10,9 @@ module.exports = function(app){
 
 
   homeRouter.get('/', HomeController.index);
-  homeRouter.get('/profile', HomeController.profile);
+  homeRouter.get('/profile/:name', HomeController.profile);
+  homeRouter.get('/jobseekers', HomeController.jobseekers);
+  homeRouter.get('/employed', HomeController.employed);
 
-  // app.use('/static', express.static('public'));
   app.use('/', homeRouter);
 }
