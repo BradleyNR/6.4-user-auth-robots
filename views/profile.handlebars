@@ -1,0 +1,33 @@
+
+
+<img class="robot-profile-pic" src="{{robot.avatar}}" alt="">
+
+
+<div class="profile-text-container">
+  <h1 class="robot-profile-header">{{robot.name}}</h1>
+
+  {{#if robot.address.city}}
+  <p>{{robot.address.city}}, {{robot.address.country}}</p>
+  {{else}}
+  <p>{{robot.address.country}}</p>
+  {{/if}}
+
+  {{#if robot.job}}
+  <p>{{robot.job}}, {{robot.company}}</p>
+  {{else}}
+  <p class="hire-me">Avaliable for Hire</p>
+  {{/if}}
+
+  <p>{{robot.email}} | {{robot.phone}}</p>
+
+  {{#if robot.university}}
+  <h2 class="inline-block">Education</h2>
+  <p>{{robot.university}}</p>
+  {{/if}}
+
+  <h2 class="inline-block block-two">Skills</h2>
+  <p>{{robot.skills.[0]}}</p>
+  <p>{{robot.skills.[1]}}</p>
+  <p>{{robot.skills.[2]}}</p>
+
+</div>
