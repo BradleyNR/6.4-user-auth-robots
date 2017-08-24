@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const routes = require('./router');
+var bodyParser = require('body-parser');
+
 
 //passport dependencies ***
 const User = require('./models/user');
@@ -45,7 +47,7 @@ passport.use('local-login', new LocalStrategy(
 
 passport.use('local-signup', new LocalStrategy(
   function(username, password, done){
-    User.signup(username, password, function(err, usr){
+    User.signup(username, password, function(err, user){
       if (err) {
           return done(err)
       }
@@ -71,6 +73,7 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
