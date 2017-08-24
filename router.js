@@ -21,12 +21,17 @@ module.exports = function(app){
   //authentification routes
   userRouter.get('/login', UserController.login);
   userRouter.get('/signup', UserController.signup);
+  userRouter.post('/signup', passport.authenticate('local-signup', {
+    successRedirect: '/',
+    failureRedirect: '/signup/',
+    failureFlash: true
+  }));
 
-  userRouter.post('/login', passport.authenticate('local', {
+  userRouter.post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
     failureRedirect: '/login/',
     failureFlash: true
-}))
+  }));
 
   app.use('/', homeRouter);
   app.use('/', userRouter);

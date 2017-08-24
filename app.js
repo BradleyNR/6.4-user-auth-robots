@@ -33,21 +33,40 @@ app.use(passport.session());
 app.use(flash());
 
 //passport setup ***
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.authenticate(username, password, function(err, user) {
-            if (err) {
-                return done(err)
-            }
-            if (user) {
-                return done(null, user)
-            } else {
-                return done(null, false, {
-                    message: "There is no user with that username and password."
-                })
-            }
-        })
-    }));
+passport.use('local-login', new LocalStrategy(
+  function(username, password, done) {
+      User.authenticate(username, password, function(err, user) {
+          if (err) {
+              return done(err)
+          }
+          if (user) {
+              return done(null, user)
+          } else {
+              return done(null, false, {
+                  message: "There is no user with that username and password."
+              })
+          }
+      })
+  }));
+
+
+passport.use('local-signup', new LocalStrategy(
+  function(username, password, done){
+    User.signup(username, password, function(err, usr){
+      if (err) {
+          return done(err)
+      }
+      if (user) {
+          return done(null, user)
+      } else {
+          return done(null, false, {
+              message: "There is already a user with that username."
+          });
+      }
+    });
+  }
+));
+
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);

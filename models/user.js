@@ -33,3 +33,24 @@ userSchema.statics.authenticate = function(username, password, done) {
         }
     })
 };
+
+userSchema.statics.signup = function(username, password, done) {
+    this.findOne({
+        username: username
+    }, function(err, user) {
+        if (err) {
+          done(err, false)
+        } else if (user){
+          done(null, false)
+        } else {
+          var newUser = new User({username: username, password: password});
+          newUser.save(function(err, user){
+            if (err) {
+              done(err, false);
+            } else{
+              done(null, user);
+            }
+          });
+        }
+    })
+};
