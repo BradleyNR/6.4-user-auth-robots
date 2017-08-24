@@ -1,3 +1,3 @@
-## 6.2 Daily - Using MVC to recreate a Customer Database
+## 6.4 Daily - Using Passport to create user login
 
-An old project remade with MVC in mind. Minimal styling. 
+An old project updated with passport to let users login and edit data. 
