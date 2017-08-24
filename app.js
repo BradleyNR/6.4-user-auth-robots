@@ -21,16 +21,9 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-//middles
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false,
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+//heroku database setup
+var database = process.env.MONGODB_URI || 'mongodb://localhost:27017/test';
+mongoose.connect(database);
 
 //passport setup ***
 passport.use('local-login', new LocalStrategy(
@@ -78,8 +71,17 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 //passing app into routes
 routes(app);
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);

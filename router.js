@@ -5,6 +5,13 @@ let HomeController = require('./controllers/home');
 //Auth
 let UserController = require('./controllers/user');
 
+const requireLogin = function (req, res, next) {
+  if (req.user) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+};
 
 module.exports = function(app){
   //creating router variables
@@ -12,7 +19,7 @@ module.exports = function(app){
   //Auth
   const userRouter = express.Router();
 
-
+  homeRouter.use(requireLogin);
   homeRouter.get('/', HomeController.index);
   homeRouter.get('/profile/:name', HomeController.profile);
   homeRouter.get('/jobseekers', HomeController.jobseekers);
@@ -23,16 +30,16 @@ module.exports = function(app){
   userRouter.get('/signup', UserController.signup);
   userRouter.post('/signup', passport.authenticate('local-signup', {
     successRedirect: '/',
-    failureRedirect: '/signup/',
+    failureRedirect: '/signup',
     failureFlash: true
   }));
-
   userRouter.post('/login', passport.authenticate('local-login', {
     successRedirect: '/',
     failureRedirect: '/login/',
     failureFlash: true
   }));
 
-  app.use('/', homeRouter);
+
   app.use('/', userRouter);
+  app.use('/', homeRouter);
 }

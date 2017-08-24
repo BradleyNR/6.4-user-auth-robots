@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
   passwordHash: { type: String, required: true }
 });
 
-const User = mongoose.model('User', userSchema);
 
 userSchema.virtual('password')
   .get(function () { return null })
@@ -39,9 +38,9 @@ userSchema.statics.signup = function(username, password, done) {
         username: username
     }, function(err, user) {
         if (err) {
-          done(err, false)
+          done(err, false);
         } else if (user){
-          done(null, false)
+          done(null, false);
         } else {
           var newUser = new User({username: username, password: password});
           newUser.save(function(err, user){
@@ -52,5 +51,9 @@ userSchema.statics.signup = function(username, password, done) {
             }
           });
         }
-    })
+    });
 };
+
+
+const User = mongoose.model('User', userSchema);
+module.exports = User;
