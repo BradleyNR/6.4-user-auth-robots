@@ -13,6 +13,9 @@ const requireLogin = function (req, res, next) {
   }
 };
 
+
+
+
 module.exports = function(app){
   //creating router variables
   const homeRouter = express.Router();

@@ -6,7 +6,21 @@ const bcrypt = require('bcryptjs');
 // TODO: check against the username (since it's unique) to see what they can access
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, lowercase: true, required: true },
-  passwordHash: { type: String, required: true }
+  passwordHash: { type: String, required: true },
+  //added from robot model
+  job: {type: String},
+  avatar: {type: String},
+  name: {type: String},
+  company: {type: String},
+  skills: [{}],
+  email: {type: String},
+  phone: {type: String},
+  university: {type: String},
+  address: {
+    state: {type: String},
+    city: {type: String},
+    country: {type: String},
+  },
 });
 
 
@@ -57,5 +71,5 @@ userSchema.statics.signup = function(username, password, done) {
 };
 
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('Robot', userSchema);
 module.exports = User;

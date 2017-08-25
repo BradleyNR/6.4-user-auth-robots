@@ -1,31 +1,35 @@
 // let Data = require('../models/data');
-let Robot = require('../models/robots');
+// let Robot = require('../models/robots');
+let User = require('../models/user');
 
 // TODO: Robot.findOne({id: id}) THIS IS HOW I CNA FIND WHAT ROBOT I AM LOGGED IN AS
 //CHECK BELOW HOOOO BOY
+// TODO: combine robot model and user model, get hash from one password, add it to the combined model,
+//use that to log in, then can compare login vs robots data with a findOne.
 
 let HomeController = {
   index: function(req, res){
     //when pulling from database, need .find
-    Robot.find().then(function(robot){
+    // Robot.find().then(function(robot){
+    User.find().then(function(robot){
       res.render('index', {robot: robot});
     });
   },
   profile: function(req, res){
     // TODO: This will select the unique ID from each login
-    console.log(req.user._id);
+    console.log(req.user);
     let robotName = req.params.name;
-    Robot.findOne({name: robotName}).then(function(robot){
+    User.findOne({name: robotName}).then(function(robot){
       res.render('profile', {robot: robot});
     });
   },
   jobseekers: function(req, res){
-    Robot.find().then(function(robot){
+    User.find().then(function(robot){
       res.render('jobseekers', {robot: robot});
     });
   },
   employed: function(req, res){
-    Robot.find().then(function(robot){
+    User.find().then(function(robot){
       res.render('employed', {robot: robot});
     });
   }
