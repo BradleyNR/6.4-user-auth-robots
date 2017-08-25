@@ -1,6 +1,8 @@
 // let Data = require('../models/data');
 let Robot = require('../models/robots');
 
+// TODO: Robot.findOne({id: id}) THIS IS HOW I CNA FIND WHAT ROBOT I AM LOGGED IN AS
+//CHECK BELOW HOOOO BOY
 
 let HomeController = {
   index: function(req, res){
@@ -10,6 +12,8 @@ let HomeController = {
     });
   },
   profile: function(req, res){
+    // TODO: This will select the unique ID from each login
+    console.log(req.user._id);
     let robotName = req.params.name;
     Robot.findOne({name: robotName}).then(function(robot){
       res.render('profile', {robot: robot});

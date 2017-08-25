@@ -13,6 +13,7 @@ const robotSchema = new mongoose.Schema({
   phone: {type: String},
   university: {type: String},
   address: {
+    state: {type: String},
     city: {type: String},
     country: {type: String},
   },

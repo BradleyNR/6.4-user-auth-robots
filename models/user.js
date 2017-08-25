@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 //newline
+// TODO: add data fields from robots.js in models to this, so they can go back and update it later
+// TODO: check against the username (since it's unique) to see what they can access
 const userSchema = new mongoose.Schema({
   username: { type: String, unique: true, lowercase: true, required: true },
   passwordHash: { type: String, required: true }

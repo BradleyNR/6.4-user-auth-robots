@@ -7,6 +7,12 @@
   color: white;
 }
 
+.homepage-login-link {
+  color: #FFFFFF;
+  font-size: 20px;
+  position: absolute;
+  left: 15px;
+}
 
 .main-header {
   font-family: 'Helvetica', sans-serif;
@@ -82,13 +88,13 @@
 
 .inline-block {
   position: absolute;
-  left: 90px;
+  left: 70px;
   bottom: 59%;
 }
 
 .block-two {
   bottom: 54%;
-  left: 142px;
+  left: 130px;
 }
 
 .hire-me {
